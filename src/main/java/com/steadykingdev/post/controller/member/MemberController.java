@@ -22,14 +22,20 @@ public class MemberController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/add")
-    public String addForm(@ModelAttribute Member member) {
+    public String addForm(@ModelAttribute AddMemberForm addMemberForm) {
         return "members/addMemberForm";
     }
 
     @PostMapping("/add")
     public String save(@Validated @ModelAttribute AddMemberForm addMemberForm, BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
+            return "members/addMemberForm";
+        }
+
+        if (addMemberForm.getPassword() != addMemberForm.getPasswordCheck()) {
+            bindingResult.reject("passwordNotMatched", "비밀번호가 일치하지않습니다.");
             return "members/addMemberForm";
         }
         memberRepository.save(addMemberForm);

@@ -17,4 +17,7 @@ public class AddMemberForm {
 
     @NotEmpty(message = "비밀번호를 입력해주세요.")
     private String password;
+
+    @NotEmpty(message = "비밀번호를 입력해주세요.")
+    private String passwordCheck;
 }
