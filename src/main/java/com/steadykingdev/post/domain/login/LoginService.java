@@ -1,4 +1,4 @@
-package com.steadykingdev.post.service;
+package com.steadykingdev.post.domain.login;
 
 import com.steadykingdev.post.domain.member.Member;
 import com.steadykingdev.post.domain.member.MemberRepository;

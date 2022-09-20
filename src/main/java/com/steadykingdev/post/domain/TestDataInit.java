@@ -1,5 +1,7 @@
-package com.steadykingdev.post.service;
+package com.steadykingdev.post.domain;
 
+import com.steadykingdev.post.domain.member.AddMemberForm;
+import com.steadykingdev.post.domain.member.AddMemberService;
 import com.steadykingdev.post.domain.member.Member;
 import com.steadykingdev.post.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +17,10 @@ public class TestDataInit {
 
     @PostConstruct
     public void init() {
-        Member member = new Member();
-        member.setLoginId("test");
-        member.setPassword("test1");
-        member.setNickName("테스터");
-
-        memberRepository.save(member);
+        AddMemberForm addMemberForm = new AddMemberForm();
+        addMemberForm.setLoginId("test");
+        addMemberForm.setPassword("test1");
+        addMemberForm.setNickName("테스터");
+        memberRepository.save(addMemberForm);
     }
 }

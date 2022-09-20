@@ -1,5 +1,6 @@
 package com.steadykingdev.post.controller.member;
 
+import com.steadykingdev.post.domain.member.AddMemberForm;
 import com.steadykingdev.post.domain.member.Member;
 import com.steadykingdev.post.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +27,13 @@ public class MemberController {
     }
 
     @PostMapping("/add")
-    public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
-        log.info("bindingResult={}", bindingResult);
+    public String save(@Validated @ModelAttribute AddMemberForm addMemberForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
             return "members/addMemberForm";
         }
-        memberRepository.save(member);
-        log.info("member={}", member);
+        memberRepository.save(addMemberForm);
+        log.info("member={}", addMemberForm);
         return "redirect:/";
     }
 }
