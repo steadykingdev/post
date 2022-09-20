@@ -34,8 +34,9 @@ public class MemberController {
             return "members/addMemberForm";
         }
 
-        if (addMemberForm.getPassword() != addMemberForm.getPasswordCheck()) {
+        if (!addMemberForm.getPassword().equals(addMemberForm.getPasswordCheck())) {
             bindingResult.reject("passwordNotMatched", "비밀번호가 일치하지않습니다.");
+            log.info("bindingResult={}", bindingResult);
             return "members/addMemberForm";
         }
         memberRepository.save(addMemberForm);
