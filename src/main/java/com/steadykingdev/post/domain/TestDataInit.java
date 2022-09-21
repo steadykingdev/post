@@ -1,9 +1,7 @@
 package com.steadykingdev.post.domain;
 
 import com.steadykingdev.post.domain.member.AddMemberForm;
-import com.steadykingdev.post.domain.member.AddMemberService;
-import com.steadykingdev.post.domain.member.Member;
-import com.steadykingdev.post.domain.member.MemberRepository;
+import com.steadykingdev.post.domain.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +11,7 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 public class TestDataInit {
 
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     @PostConstruct
     public void init() {
@@ -21,6 +19,6 @@ public class TestDataInit {
         addMemberForm.setLoginId("test");
         addMemberForm.setPassword("test1");
         addMemberForm.setNickName("테스터");
-        memberRepository.save(addMemberForm);
+        memberService.addMember(addMemberForm);
     }
 }
