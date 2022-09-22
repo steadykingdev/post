@@ -1,4 +1,4 @@
-package com.steadykingdev.post.controller.login;
+package com.steadykingdev.post.controller;
 
 import com.steadykingdev.post.SessionConst;
 import com.steadykingdev.post.domain.login.LoginService;

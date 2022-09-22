@@ -1,4 +1,4 @@
-package com.steadykingdev.post.controller.member;
+package com.steadykingdev.post.controller;
 
 import com.steadykingdev.post.domain.member.AddMemberForm;
 import com.steadykingdev.post.domain.member.Member;
@@ -32,24 +32,15 @@ public class MemberController {
     public String save(@Validated @ModelAttribute AddMemberForm addMemberForm, BindingResult bindingResult) {
         log.info("member={}", addMemberForm);
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || memberService.test(addMemberForm) != null) {
             log.info("bindingResult={}", bindingResult);
-            return "members/addMemberForm";
+            if (memberService.test(addMemberForm) != null) {
+                FieldError fieldError = memberService.test(addMemberForm);
+                bindingResult.addError(fieldError);
+            }
+            return "member/addMemberForm";
         }
 
-        if (!addMemberForm.getPassword().equals(addMemberForm.getPasswordCheck())) {
-            bindingResult.addError(new FieldError("addMemberForm","passwordCheck","비밀번호가 일치하지 않습니다."));
-            log.info("bindingResult={}", bindingResult);
-            return "members/addMemberForm";
-        }
-
-        Member member = memberService.addMember(addMemberForm);
-
-        if (member.getId() == null) {
-            log.info("if문 member={}", member);
-            bindingResult.addError(new FieldError("addMemberForm","loginId","이미 존재하는 아이디입니다."));
-            return "members/addMemberForm";
-        }
 
         return "redirect:/";
     }
