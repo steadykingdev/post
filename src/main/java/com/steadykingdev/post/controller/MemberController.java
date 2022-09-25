@@ -1,6 +1,6 @@
 package com.steadykingdev.post.controller;
 
-import com.steadykingdev.post.dto.MemberCreateRequestDto;
+import com.steadykingdev.post.dto.MemberCreateDto;
 import com.steadykingdev.post.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,18 +22,18 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/add")
-    public String addForm(@ModelAttribute MemberCreateRequestDto memberCreateRequestDto) {
+    public String addForm(@ModelAttribute MemberCreateDto memberCreateDto) {
         return "member/addMemberForm";
     }
 
     @PostMapping("/add")
-    public String save(@Validated @ModelAttribute MemberCreateRequestDto memberCreateRequestDto, BindingResult bindingResult) {
-        log.info("memberCreateRequestDto={}", memberCreateRequestDto);
+    public String save(@Validated @ModelAttribute MemberCreateDto memberCreateDto, BindingResult bindingResult) {
+        log.info("memberCreateRequestDto={}", memberCreateDto);
 
-        if (bindingResult.hasErrors() || memberService.validate(memberCreateRequestDto) != null) {
+        if (bindingResult.hasErrors() || memberService.validate(memberCreateDto) != null) {
             log.info("bindingResult={}", bindingResult);
-            if (memberService.validate(memberCreateRequestDto) != null) {
-                FieldError fieldError = memberService.validate(memberCreateRequestDto);
+            if (memberService.validate(memberCreateDto) != null) {
+                FieldError fieldError = memberService.validate(memberCreateDto);
                 bindingResult.addError(fieldError);
             }
             return "member/addMemberForm";

@@ -1,7 +1,7 @@
 package com.steadykingdev.post;
 
 import com.steadykingdev.post.domain.Member;
-import com.steadykingdev.post.dto.MemberCreateRequestDto;
+import com.steadykingdev.post.dto.MemberCreateDto;
 import com.steadykingdev.post.dto.PostForm;
 import com.steadykingdev.post.service.MemberService;
 import com.steadykingdev.post.service.PostService;
@@ -21,11 +21,11 @@ public class TestDataInit {
 
     @PostConstruct
     public void init() {
-        MemberCreateRequestDto memberCreateRequestDto = new MemberCreateRequestDto();
-        memberCreateRequestDto.setLoginId("test");
-        memberCreateRequestDto.setPassword("test1");
-        memberCreateRequestDto.setNickName("테스터");
-        Member member = memberService.addMember(memberCreateRequestDto);
+        MemberCreateDto memberCreateDto = new MemberCreateDto();
+        memberCreateDto.setLoginId("test");
+        memberCreateDto.setPassword("test1");
+        memberCreateDto.setNickName("테스터");
+        Member member = memberService.addMember(memberCreateDto);
 
         PostForm postForm = new PostForm();
         postForm.setTitle("test post");
