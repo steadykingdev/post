@@ -62,14 +62,8 @@ public class PostService {
         List<PostDto> postFormList = new ArrayList<>();
 
         for (Post post : postList) {
-            PostDto postForm = PostDto.builder()
-                    .id(post.getId())
-                    .memberId(post.getMemberId())
-                    .title(post.getTitle())
-                    .dateTime(post.getDateTime())
-                    .contents(post.getContents())
-                    .nickName(memoryMemberRepository.findById(post.getMemberId()).getNickName())
-                    .build();
+            PostDto postForm = post.toPostDto();
+            postForm.setNickName(memoryMemberRepository.findById(post.getMemberId()).getNickName());
             postFormList.add(postForm);
         }
         return postFormList;
