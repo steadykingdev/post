@@ -1,9 +1,7 @@
 package com.steadykingdev.post.controller;
 
-import com.steadykingdev.post.domain.member.AddMemberForm;
-import com.steadykingdev.post.domain.member.Member;
-import com.steadykingdev.post.domain.member.MemberRepository;
-import com.steadykingdev.post.domain.member.MemberService;
+import com.steadykingdev.post.dto.AddMemberForm;
+import com.steadykingdev.post.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

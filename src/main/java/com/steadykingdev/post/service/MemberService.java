@@ -1,5 +1,8 @@
-package com.steadykingdev.post.domain.member;
+package com.steadykingdev.post.service;
 
+import com.steadykingdev.post.domain.Member;
+import com.steadykingdev.post.dto.AddMemberForm;
+import com.steadykingdev.post.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;

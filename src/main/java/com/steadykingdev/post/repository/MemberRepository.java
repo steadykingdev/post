@@ -1,5 +1,6 @@
-package com.steadykingdev.post.domain.member;
+package com.steadykingdev.post.repository;
 
+import com.steadykingdev.post.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -14,11 +15,12 @@ public class MemberRepository {
     private static final Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
 
-    public void save(Member member) {
+    public Member save(Member member) {
 //        Member member = memberService.addMember(addMemberForm.getLoginId(), addMemberForm.getPassword(), addMemberForm.getNickName());
         member.setId(++sequence);
         log.info("member={}", member);
         store.put(member.getId(), member);
+        return member;
     }
 
     public Member findById(Long id) {

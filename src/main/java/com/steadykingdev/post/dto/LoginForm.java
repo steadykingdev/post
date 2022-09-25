@@ -1,4 +1,4 @@
-package com.steadykingdev.post.domain.login;
+package com.steadykingdev.post.dto;
 
 import lombok.Data;
 

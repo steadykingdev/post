@@ -1,7 +1,7 @@
-package com.steadykingdev.post.domain.login;
+package com.steadykingdev.post.service;
 
-import com.steadykingdev.post.domain.member.Member;
-import com.steadykingdev.post.domain.member.MemberRepository;
+import com.steadykingdev.post.domain.Member;
+import com.steadykingdev.post.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

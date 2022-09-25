@@ -1,9 +1,9 @@
 package com.steadykingdev.post.controller;
 
 import com.steadykingdev.post.SessionConst;
-import com.steadykingdev.post.domain.login.LoginService;
-import com.steadykingdev.post.domain.login.LoginForm;
-import com.steadykingdev.post.domain.member.Member;
+import com.steadykingdev.post.service.LoginService;
+import com.steadykingdev.post.dto.LoginForm;
+import com.steadykingdev.post.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

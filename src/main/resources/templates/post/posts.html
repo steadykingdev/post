@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8"/>
+    <style>
+        .container {
+            max-width: 560px;
+            margin: auto;
+        }
+        .table {
+            width: 100%;
+            border: 1px solid #444444;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #444444;
+            text-align: center;
+        }
+        .title {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <h1 class="title">게시판</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th th:text="#{label.post.id}">ID</th>
+                <th th:text="#{label.post.title}">제목</th>
+                <th th:text="#{label.post.nickName}">닉네임</th>
+                <th th:text="#{label.post.dateTime}">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${posts}">
+                <td><a href="post.html" th:href="@{|/post/${post.id}|}" th:text="${post.id}">회원id</a></td>
+                <td><a href="post.html" th:href="@{|/post/${post.id}|}" th:text="${post.title}">제목</a></td>
+                <td th:text="${post.nickName}">닉네임</td>
+                <td th:text="${post.dateTime}">작성일</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>
