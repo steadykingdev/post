@@ -2,7 +2,7 @@ package com.steadykingdev.post.controller;
 
 import com.steadykingdev.post.SessionConst;
 import com.steadykingdev.post.service.LoginService;
-import com.steadykingdev.post.dto.LoginForm;
+import com.steadykingdev.post.dto.LoginDto;
 import com.steadykingdev.post.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,12 +25,12 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginForm") LoginForm loginForm) {
+    public String loginForm(@ModelAttribute("loginForm") LoginDto loginDto) {
         return "login/loginForm";
     }
 
     @PostMapping("/login")
-    public String login(@Validated @ModelAttribute("loginForm") LoginForm loginForm, BindingResult bindingResult,
+    public String login(@Validated @ModelAttribute("loginForm") LoginDto loginDto, BindingResult bindingResult,
                         @RequestParam(defaultValue = "/") String redirectURL,
                         HttpServletRequest request) {
 
@@ -38,7 +38,7 @@ public class LoginController {
             return "login/loginForm";
         }
 
-        Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+        Member loginMember = loginService.login(loginDto);
         log.info("loginMember={}", loginMember);
 
         if (loginMember == null) {

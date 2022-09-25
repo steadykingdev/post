@@ -13,7 +13,7 @@ import java.util.Map;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class PostRepository {
+public class MemoryPostRepository {
 
     private static final Map<Long, Post> store = new HashMap<>();
     private static long sequance = 0L;

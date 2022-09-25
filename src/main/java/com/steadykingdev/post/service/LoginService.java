@@ -1,7 +1,8 @@
 package com.steadykingdev.post.service;
 
 import com.steadykingdev.post.domain.Member;
-import com.steadykingdev.post.repository.MemberRepository;
+import com.steadykingdev.post.dto.LoginDto;
+import com.steadykingdev.post.repository.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +10,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LoginService {
 
-    private final MemberRepository memberRepository;
+    private final MemoryMemberRepository memoryMemberRepository;
 
-    public Member login(String loginId, String password) {
-        return memberRepository.findByLoginId(loginId)
-                .filter(m -> m.getPassword().equals(password))
+    public Member login(LoginDto loginDto) {
+        return memoryMemberRepository.findByLoginId(loginDto.getLoginId())
+                .filter(m -> m.getPassword().equals(loginDto.getPassword()))
                 .orElse(null);
     }
 }

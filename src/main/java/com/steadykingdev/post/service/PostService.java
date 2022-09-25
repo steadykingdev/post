@@ -3,8 +3,8 @@ package com.steadykingdev.post.service;
 import com.steadykingdev.post.domain.Member;
 import com.steadykingdev.post.domain.Post;
 import com.steadykingdev.post.dto.PostForm;
-import com.steadykingdev.post.repository.MemberRepository;
-import com.steadykingdev.post.repository.PostRepository;
+import com.steadykingdev.post.repository.MemoryMemberRepository;
+import com.steadykingdev.post.repository.MemoryPostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostService {
 
-    private final PostRepository postRepository;
-    private final MemberRepository memberRepository;
+    private final MemoryPostRepository memoryPostRepository;
+    private final MemoryMemberRepository memoryMemberRepository;
 
     public PostForm addPost(PostForm postForm, Long memberId) {
 
@@ -31,7 +31,7 @@ public class PostService {
                 .dateTime(LocalDate.now())
                 .build();
 
-        Post savedPost = postRepository.save(post);
+        Post savedPost = memoryPostRepository.save(post);
         log.info("repositoryPost={}", savedPost);
 
         return postForm;
@@ -41,14 +41,14 @@ public class PostService {
 
         Post post = postForm.toPost();
         log.info("edit service post={}", post);
-        Post editedPost = postRepository.update(postId, post);
+        Post editedPost = memoryPostRepository.update(postId, post);
         return postForm;
     }
 
     public PostForm getPost(Long postId) {
 
-        Post findPost = postRepository.findById(postId);
-        Member member = memberRepository.findById(findPost.getMemberId());
+        Post findPost = memoryPostRepository.findById(postId);
+        Member member = memoryMemberRepository.findById(findPost.getMemberId());
 
         PostForm requestForm = findPost.toPostForm();
         requestForm.setNickName(member.getNickName());
@@ -59,7 +59,7 @@ public class PostService {
     }
 
     public List<PostForm> getPostList() {
-        List<Post> postList = postRepository.findAll();
+        List<Post> postList = memoryPostRepository.findAll();
         List<PostForm> postFormList = new ArrayList<>();
 
         for (Post post : postList) {
@@ -69,7 +69,7 @@ public class PostService {
                     .title(post.getTitle())
                     .dateTime(post.getDateTime())
                     .contents(post.getContents())
-                    .nickName(memberRepository.findById(post.getMemberId()).getNickName())
+                    .nickName(memoryMemberRepository.findById(post.getMemberId()).getNickName())
                     .build();
             postFormList.add(postForm);
         }

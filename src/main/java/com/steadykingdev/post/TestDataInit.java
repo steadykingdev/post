@@ -1,8 +1,9 @@
-package com.steadykingdev.post.domain;
+package com.steadykingdev.post;
 
-import com.steadykingdev.post.dto.AddMemberForm;
-import com.steadykingdev.post.service.MemberService;
+import com.steadykingdev.post.domain.Member;
+import com.steadykingdev.post.dto.MemberCreateRequestDto;
 import com.steadykingdev.post.dto.PostForm;
+import com.steadykingdev.post.service.MemberService;
 import com.steadykingdev.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +21,11 @@ public class TestDataInit {
 
     @PostConstruct
     public void init() {
-        AddMemberForm addMemberForm = new AddMemberForm();
-        addMemberForm.setLoginId("test");
-        addMemberForm.setPassword("test1");
-        addMemberForm.setNickName("테스터");
-        Member member = memberService.addMember(addMemberForm);
+        MemberCreateRequestDto memberCreateRequestDto = new MemberCreateRequestDto();
+        memberCreateRequestDto.setLoginId("test");
+        memberCreateRequestDto.setPassword("test1");
+        memberCreateRequestDto.setNickName("테스터");
+        Member member = memberService.addMember(memberCreateRequestDto);
 
         PostForm postForm = new PostForm();
         postForm.setTitle("test post");

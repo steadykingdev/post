@@ -20,7 +20,7 @@
             <h1>로그인</h1>
         </div>
 
-        <form action="" th:object="${loginForm}" method="post">
+        <form action="" th:object="${loginDto}" method="post">
             <div th:if="${#fields.hasGlobalErrors()}">
                 <p class="field-error" th:each="err : ${#fields.globalErrors()}"
                    th:text="${err}"> 전체 오류 메시지</p>

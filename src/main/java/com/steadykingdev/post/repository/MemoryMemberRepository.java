@@ -10,7 +10,7 @@ import java.util.*;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class MemberRepository {
+public class MemoryMemberRepository {
 
     private static final Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
