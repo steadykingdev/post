@@ -2,6 +2,7 @@ package com.steadykingdev.post.controller;
 
 import com.steadykingdev.post.SessionConst;
 import com.steadykingdev.post.domain.Member;
+import com.steadykingdev.post.dto.PostWriteDto;
 import com.steadykingdev.post.dto.PostForm;
 import com.steadykingdev.post.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -30,16 +31,16 @@ public class PostController {
     }
 
     @GetMapping("/add")
-    public String addPostForm(@ModelAttribute PostForm postForm) {
+    public String addPostForm(@ModelAttribute PostWriteDto postWriteDto) {
         return "post/addPostForm";
     }
 
     @PostMapping("/add")
-    public String addPost(@ModelAttribute PostForm postForm, HttpServletRequest request) {
+    public String addPost(@ModelAttribute PostWriteDto postWriteDto, HttpServletRequest request) {
 
         HttpSession session = request.getSession(false);
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        postService.addPost(postForm, member.getId());
+        postService.addPost(postWriteDto, member.getId());
         return "redirect:/";
     }
 

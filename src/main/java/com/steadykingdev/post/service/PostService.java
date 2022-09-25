@@ -2,6 +2,7 @@ package com.steadykingdev.post.service;
 
 import com.steadykingdev.post.domain.Member;
 import com.steadykingdev.post.domain.Post;
+import com.steadykingdev.post.dto.PostWriteDto;
 import com.steadykingdev.post.dto.PostForm;
 import com.steadykingdev.post.repository.MemoryMemberRepository;
 import com.steadykingdev.post.repository.MemoryPostRepository;
@@ -21,20 +22,19 @@ public class PostService {
     private final MemoryPostRepository memoryPostRepository;
     private final MemoryMemberRepository memoryMemberRepository;
 
-    public PostForm addPost(PostForm postForm, Long memberId) {
+    public PostWriteDto addPost(PostWriteDto postWriteDto, Long memberId) {
 
         Post post= Post.builder()
-                .id(postForm.getId())
                 .memberId(memberId)
-                .title(postForm.getTitle())
-                .contents(postForm.getContents())
+                .title(postWriteDto.getTitle())
+                .contents(postWriteDto.getContents())
                 .dateTime(LocalDate.now())
                 .build();
 
         Post savedPost = memoryPostRepository.save(post);
-        log.info("repositoryPost={}", savedPost);
+        log.info("add post repository={}", savedPost);
 
-        return postForm;
+        return postWriteDto;
     }
 
     public PostForm editPost(Long postId, PostForm postForm){

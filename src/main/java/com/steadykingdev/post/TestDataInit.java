@@ -2,7 +2,7 @@ package com.steadykingdev.post;
 
 import com.steadykingdev.post.domain.Member;
 import com.steadykingdev.post.dto.MemberCreateDto;
-import com.steadykingdev.post.dto.PostForm;
+import com.steadykingdev.post.dto.PostWriteDto;
 import com.steadykingdev.post.service.MemberService;
 import com.steadykingdev.post.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -27,17 +27,15 @@ public class TestDataInit {
         memberCreateDto.setNickName("테스터");
         Member member = memberService.addMember(memberCreateDto);
 
-        PostForm postForm = new PostForm();
-        postForm.setTitle("test post");
-        postForm.setContents("테스트중입니다.");
-        postForm.setNickName(member.getNickName());
-        postService.addPost(postForm, member.getId());
-        PostForm postForm2 = new PostForm();
-        postForm2.setTitle("test post");
-        postForm2.setContents("테스트중입니다.");
-        postForm2.setNickName(member.getNickName());
-        postService.addPost(postForm, member.getId());
-        log.info("postForm={}", postForm);
-        log.info("postForm2={}", postForm2);
+        PostWriteDto postWriteDto = new PostWriteDto();
+        postWriteDto.setTitle("test post");
+        postWriteDto.setContents("테스트중입니다.");
+        postService.addPost(postWriteDto, member.getId());
+        PostWriteDto postWriteDto2 = new PostWriteDto();
+        postWriteDto2.setTitle("test post");
+        postWriteDto2.setContents("테스트중입니다.");
+        postService.addPost(postWriteDto2, member.getId());
+        log.info("postForm={}", postWriteDto);
+        log.info("postForm2={}", postWriteDto2);
     }
 }
