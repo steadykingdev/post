@@ -24,12 +24,11 @@ public class MemoryPostRepository {
         return post;
     }
 
-    public Post update(Long postId, Post updatePost) {
-        log.info("repository updatePost={}", updatePost);
+    public Post update(Long postId, String title, String contents) {
         Post post = store.get(postId);
 
-        post.setTitle(updatePost.getTitle());
-        post.setContents(updatePost.getContents());
+        post.setTitle(title);
+        post.setContents(contents);
         post.setDateTime(post.getDateTime());
 
         return post;

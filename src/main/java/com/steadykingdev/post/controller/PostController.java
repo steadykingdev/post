@@ -3,7 +3,7 @@ package com.steadykingdev.post.controller;
 import com.steadykingdev.post.SessionConst;
 import com.steadykingdev.post.domain.Member;
 import com.steadykingdev.post.dto.PostWriteDto;
-import com.steadykingdev.post.dto.PostForm;
+import com.steadykingdev.post.dto.PostDto;
 import com.steadykingdev.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class PostController {
 
     @GetMapping
     public String posts(Model model) {
-        List<PostForm> posts = postService.getPostList();
+        List<PostDto> posts = postService.getPostList();
         model.addAttribute("posts", posts);
         return "post/posts";
     }
@@ -56,7 +56,7 @@ public class PostController {
             memberId = member.getId();
         }
 
-        PostForm form = postService.getPost(postId);
+        PostDto form = postService.getPost(postId);
 
 
         model.addAttribute("postForm", form);
@@ -67,16 +67,16 @@ public class PostController {
 
     @GetMapping("/{postId}/edit")
     public String editForm(@PathVariable Long postId, Model model) {
-        PostForm postForm = postService.getPost(postId);
-        model.addAttribute("postForm", postForm);
+        PostDto postDto = postService.getPost(postId);
+        model.addAttribute("postWriteDto", postDto);
 
         return "post/editPostForm";
     }
 
     @PostMapping("/{postId}/edit")
-    public String editPost(@ModelAttribute PostForm postForm, @PathVariable Long postId) {
+    public String editPost(@ModelAttribute PostWriteDto postWriteDto, @PathVariable Long postId) {
 
-        postService.editPost(postId, postForm);
+        postService.editPost(postId, postWriteDto);
 
         return "redirect:/post/{postId}";
     }

@@ -1,6 +1,6 @@
 package com.steadykingdev.post.domain;
 
-import com.steadykingdev.post.dto.PostForm;
+import com.steadykingdev.post.dto.PostDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -17,15 +17,15 @@ public class Post {
     private String contents;
     private LocalDate dateTime;
 
-    public PostForm toPostForm() {
-        PostForm postForm = PostForm.builder()
+    public PostDto toPostDto() {
+        PostDto postDto = PostDto.builder()
                 .id(id)
                 .memberId(memberId)
                 .title(title)
                 .contents(contents)
                 .dateTime(dateTime)
                 .build();
-        return postForm;
+        return postDto;
     }
 
     @Builder

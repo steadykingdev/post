@@ -20,7 +20,7 @@
         <div>
             <h1>게시물 수정</h1>
         </div>
-        <form action="" th:object="${postForm}" method="post">
+        <form action="" th:object="${postWriteDto}" method="post">
             <div th:if="${#fields.hasGlobalErrors()}">
                 <p class="field-error" th:each="err : ${#fields.globalErrors()}"
                    th:text="${err}"> 전체 오류 메시지</p>

@@ -3,7 +3,7 @@ package com.steadykingdev.post.service;
 import com.steadykingdev.post.domain.Member;
 import com.steadykingdev.post.domain.Post;
 import com.steadykingdev.post.dto.PostWriteDto;
-import com.steadykingdev.post.dto.PostForm;
+import com.steadykingdev.post.dto.PostDto;
 import com.steadykingdev.post.repository.MemoryMemberRepository;
 import com.steadykingdev.post.repository.MemoryPostRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,33 +37,32 @@ public class PostService {
         return postWriteDto;
     }
 
-    public PostForm editPost(Long postId, PostForm postForm){
+    public PostWriteDto editPost(Long postId, PostWriteDto postWriteDto){
 
-        Post post = postForm.toPost();
-        log.info("edit service post={}", post);
-        Post editedPost = memoryPostRepository.update(postId, post);
-        return postForm;
+        Post savedPost = memoryPostRepository.update(postId, postWriteDto.getTitle(), postWriteDto.getContents());
+        log.info("edit post ={}", savedPost);
+        return postWriteDto;
     }
 
-    public PostForm getPost(Long postId) {
+    public PostDto getPost(Long postId) {
 
         Post findPost = memoryPostRepository.findById(postId);
         Member member = memoryMemberRepository.findById(findPost.getMemberId());
 
-        PostForm requestForm = findPost.toPostForm();
-        requestForm.setNickName(member.getNickName());
+        PostDto postDto = findPost.toPostDto();
+        postDto.setNickName(member.getNickName());
 
-        log.info("requestForm={}", requestForm);
+        log.info("requestForm={}", postDto);
 
-        return requestForm;
+        return postDto;
     }
 
-    public List<PostForm> getPostList() {
+    public List<PostDto> getPostList() {
         List<Post> postList = memoryPostRepository.findAll();
-        List<PostForm> postFormList = new ArrayList<>();
+        List<PostDto> postFormList = new ArrayList<>();
 
         for (Post post : postList) {
-            PostForm postForm = PostForm.builder()
+            PostDto postForm = PostDto.builder()
                     .id(post.getId())
                     .memberId(post.getMemberId())
                     .title(post.getTitle())
