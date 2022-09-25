@@ -30,7 +30,7 @@ public class TestDataInit {
         memberCreateDto2.setLoginId("test2");
         memberCreateDto2.setPassword("test2");
         memberCreateDto2.setNickName("테스터2");
-        Member member2 = memberService.addMember(memberCreateDto);
+        Member member2 = memberService.addMember(memberCreateDto2);
 
         PostWriteDto postWriteDto = new PostWriteDto();
         postWriteDto.setTitle("test post");

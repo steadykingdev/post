@@ -25,12 +25,12 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginForm") LoginDto loginDto) {
+    public String loginForm(@ModelAttribute LoginDto loginDto) {
         return "login/loginForm";
     }
 
     @PostMapping("/login")
-    public String login(@Validated @ModelAttribute("loginForm") LoginDto loginDto, BindingResult bindingResult,
+    public String login(@Validated @ModelAttribute LoginDto loginDto, BindingResult bindingResult,
                         @RequestParam(defaultValue = "/") String redirectURL,
                         HttpServletRequest request) {
 

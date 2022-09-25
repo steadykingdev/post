@@ -1,6 +1,7 @@
 package com.steadykingdev.post.controller;
 
 import com.steadykingdev.post.SessionConst;
+import com.steadykingdev.post.argumentresolver.Login;
 import com.steadykingdev.post.domain.Member;
 import com.steadykingdev.post.dto.PostWriteDto;
 import com.steadykingdev.post.dto.PostDto;
@@ -36,31 +37,21 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    public String addPost(@ModelAttribute PostWriteDto postWriteDto, HttpServletRequest request) {
-
-        HttpSession session = request.getSession(false);
-        Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+    public String addPost(@ModelAttribute PostWriteDto postWriteDto, @Login Member member) {
+        log.info("member={}", member);
         postService.addPost(postWriteDto, member.getId());
-        return "redirect:/";
+        return "redirect:/post";
     }
 
     @GetMapping("/{postId}")
     public String getPost(@PathVariable Long postId,
-                          HttpServletRequest request, Model model) {
-
-        HttpSession session = request.getSession(false);
-
-        Long memberId = null;
-        if (session != null) {
-            Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-            memberId = member.getId();
-        }
+                          @Login Member member, Model model) {
 
         PostDto form = postService.getPost(postId);
 
 
         model.addAttribute("postForm", form);
-        model.addAttribute("memberId", memberId);
+        model.addAttribute("memberId", member.getId());
 
         return "post/post";
     }

@@ -28,7 +28,7 @@ public class MemberController {
 
     @PostMapping("/add")
     public String save(@Validated @ModelAttribute MemberCreateDto memberCreateDto, BindingResult bindingResult) {
-        log.info("memberCreateRequestDto={}", memberCreateDto);
+        log.info("memberCreateDto={}", memberCreateDto);
 
         if (bindingResult.hasErrors() || memberService.validate(memberCreateDto) != null) {
             log.info("bindingResult={}", bindingResult);
@@ -40,6 +40,6 @@ public class MemberController {
         }
 
 
-        return "redirect:/";
+        return "redirect:/post";
     }
 }
