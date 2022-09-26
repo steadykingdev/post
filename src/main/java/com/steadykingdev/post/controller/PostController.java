@@ -1,6 +1,5 @@
 package com.steadykingdev.post.controller;
 
-import com.steadykingdev.post.SessionConst;
 import com.steadykingdev.post.argumentresolver.Login;
 import com.steadykingdev.post.domain.Member;
 import com.steadykingdev.post.dto.PostWriteDto;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -38,6 +35,7 @@ public class PostController {
 
     @PostMapping("/add")
     public String addPost(@ModelAttribute PostWriteDto postWriteDto, @Login Member member) {
+
         log.info("member={}", member);
         postService.addPost(postWriteDto, member.getId());
         return "redirect:/post";
@@ -48,16 +46,21 @@ public class PostController {
                           @Login Member member, Model model) {
 
         PostDto form = postService.getPost(postId);
+        Long memberId = new Long(0);
 
+        if(member != null) {
+            memberId = member.getId();
+        }
 
         model.addAttribute("postForm", form);
-//        model.addAttribute("memberId", member.getId());
+        model.addAttribute("memberId", memberId);
 
         return "post/post";
     }
 
     @GetMapping("/{postId}/edit")
     public String editForm(@PathVariable Long postId, Model model) {
+
         PostDto postDto = postService.getPost(postId);
         model.addAttribute("postWriteDto", postDto);
 
@@ -72,9 +75,11 @@ public class PostController {
         return "redirect:/post/{postId}";
     }
 
-    @DeleteMapping("/{postId}/delete")
+    @PostMapping("/{postId}/delete")
     public String deletePost(@PathVariable Long postId) {
+
         postService.deletePost(postId);
+
         return "redirect:/post";
     }
 

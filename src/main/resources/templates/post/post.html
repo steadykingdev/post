@@ -36,8 +36,10 @@
         <div class="content_area">
             <pre class="content" th:text="${postForm.contents}">본문</pre>
         </div>
-        <button th:onclick="|location.href='@{/post/{postId}/edit(postId=${postForm.id})}'|">수정</button>
-        <button th:onclick="|location.href='@{/post/{postId}/delete(postId=${postForm.id})}'|">삭제</button>
+        <button th:if="${postForm.memberId} == ${memberId}" th:onclick="|location.href='@{/post/{postId}/edit(postId=${postForm.id})}'|">수정</button>
+        <form th:if="${postForm.memberId} == ${memberId}" th:action="@{/post/{postId}/delete(postId=${postForm.id})}" th:method="post">
+            <button type="submit">삭제</button>
+        </form>
         <button th:onclick="|location.href='@{/post}'|">뒤로가기</button>
     </div>
 </div>
