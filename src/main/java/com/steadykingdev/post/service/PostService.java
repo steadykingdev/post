@@ -23,7 +23,6 @@ public class PostService {
     private final MemoryMemberRepository memoryMemberRepository;
 
     public PostWriteDto addPost(PostWriteDto postWriteDto, Long memberId) {
-
         Post post= Post.builder()
                 .memberId(memberId)
                 .title(postWriteDto.getTitle())

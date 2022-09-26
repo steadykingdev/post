@@ -1,6 +1,7 @@
 package com.steadykingdev.post.controller;
 
 import com.steadykingdev.post.SessionConst;
+import com.steadykingdev.post.argumentresolver.Login;
 import com.steadykingdev.post.service.LoginService;
 import com.steadykingdev.post.dto.LoginDto;
 import com.steadykingdev.post.domain.Member;
@@ -25,7 +26,10 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute LoginDto loginDto) {
+    public String loginForm(@ModelAttribute LoginDto loginDto, @Login Member member) {
+        if (member != null) {
+            return "redirect:/";
+        }
         return "login/loginForm";
     }
 
@@ -49,11 +53,10 @@ public class LoginController {
         HttpSession session = request.getSession();
 
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
         return "redirect:" + redirectURL;
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logoutV3(HttpServletRequest request) {
 
         HttpSession session = request.getSession(false);

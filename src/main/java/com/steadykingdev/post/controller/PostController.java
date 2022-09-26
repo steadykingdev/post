@@ -36,7 +36,6 @@ public class PostController {
     @PostMapping("/add")
     public String addPost(@ModelAttribute PostWriteDto postWriteDto, @Login Member member) {
 
-        log.info("member={}", member);
         postService.addPost(postWriteDto, member.getId());
         return "redirect:/post";
     }
@@ -59,9 +58,10 @@ public class PostController {
     }
 
     @GetMapping("/{postId}/edit")
-    public String editForm(@PathVariable Long postId, Model model) {
+    public String editForm(@PathVariable Long postId,@Login Member member, Model model) {
 
         PostDto postDto = postService.getPost(postId);
+
         model.addAttribute("postWriteDto", postDto);
 
         return "post/editPostForm";

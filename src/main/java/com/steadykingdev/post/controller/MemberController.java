@@ -1,5 +1,7 @@
 package com.steadykingdev.post.controller;
 
+import com.steadykingdev.post.argumentresolver.Login;
+import com.steadykingdev.post.domain.Member;
 import com.steadykingdev.post.dto.MemberCreateDto;
 import com.steadykingdev.post.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +24,12 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/add")
-    public String addForm(@ModelAttribute MemberCreateDto memberCreateDto) {
+    public String addForm(@ModelAttribute MemberCreateDto memberCreateDto, @Login Member member) {
+
+        if (member != null) {
+            return "redirect:/";
+        }
+
         return "member/addMemberForm";
     }
 
