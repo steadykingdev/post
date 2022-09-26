@@ -51,7 +51,7 @@ public class PostController {
 
 
         model.addAttribute("postForm", form);
-        model.addAttribute("memberId", member.getId());
+//        model.addAttribute("memberId", member.getId());
 
         return "post/post";
     }
@@ -72,9 +72,10 @@ public class PostController {
         return "redirect:/post/{postId}";
     }
 
-    @PostMapping("/{postId}/delete")
-    public String deletePost(@PathVariable Long a) {
-        return "";
+    @DeleteMapping("/{postId}/delete")
+    public String deletePost(@PathVariable Long postId) {
+        postService.deletePost(postId);
+        return "redirect:/post";
     }
 
 }

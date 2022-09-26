@@ -58,14 +58,19 @@ public class PostService {
     }
 
     public List<PostDto> getPostList() {
+
         List<Post> postList = memoryPostRepository.findAll();
         List<PostDto> postFormList = new ArrayList<>();
 
         for (Post post : postList) {
-            PostDto postForm = post.toPostDto();
-            postForm.setNickName(memoryMemberRepository.findById(post.getMemberId()).getNickName());
-            postFormList.add(postForm);
+            PostDto postDto = post.toPostDto();
+            postDto.setNickName(memoryMemberRepository.findById(post.getMemberId()).getNickName());
+            postFormList.add(postDto);
         }
         return postFormList;
+    }
+
+    public void deletePost(Long postId) {
+        memoryPostRepository.delete(postId);
     }
 }

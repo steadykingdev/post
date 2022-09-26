@@ -30,8 +30,8 @@
             <h1 class="title" th:text="${postForm.title}">게시물 제목</h1>
         </div>
         <div>
-            <span th:text="${postForm.nickName}"></span>
-            <span class="datetime" th:text="${postForm.dateTime}"></span>
+            <span th:text="|작성자 : ${postForm.nickName}|"></span>
+            <span class="datetime" th:text="|작성일 : ${postForm.dateTime}|"></span>
         </div>
         <div class="content_area">
             <pre class="content" th:text="${postForm.contents}">본문</pre>

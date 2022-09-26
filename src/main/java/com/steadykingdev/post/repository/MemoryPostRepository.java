@@ -24,8 +24,8 @@ public class MemoryPostRepository {
         return post;
     }
 
-    public Post update(Long postId, String title, String contents) {
-        Post post = store.get(postId);
+    public Post update(Long id, String title, String contents) {
+        Post post = store.get(id);
 
         post.setTitle(title);
         post.setContents(contents);
@@ -40,5 +40,9 @@ public class MemoryPostRepository {
 
     public List<Post> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    public void delete(Long id) {
+        store.remove(id);
     }
 }

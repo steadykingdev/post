@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class PostDto {
 
     private Long id;
+    private Long memberId;
     private String title;
     private String contents;
     private String nickName;
@@ -20,6 +21,7 @@ public class PostDto {
     public Post toPost() {
         Post post = Post.builder()
                 .id(id)
+                .memberId(memberId)
                 .title(title)
                 .contents(contents)
                 .dateTime(dateTime)
@@ -30,6 +32,7 @@ public class PostDto {
     @Builder
     public PostDto(Long id, Long memberId, String title, String contents, String nickName, LocalDate dateTime) {
         this.id = id;
+        this.memberId = memberId;
         this.title = title;
         this.contents = contents;
         this.nickName = nickName;
