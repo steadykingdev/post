@@ -65,7 +65,7 @@ public class PostService {
 
         for (Post post : postList) {
             PostDto postDto = post.toPostDto();
-            postDto.setId(++sequance);
+            postDto.setRowNum(++sequance);
             postDto.setNickName(memoryMemberRepository.findById(post.getMemberId()).getNickName());
             postFormList.add(postDto);
         }

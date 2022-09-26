@@ -17,6 +17,7 @@ public class PostDto {
     private String contents;
     private String nickName;
     private LocalDate dateTime;
+    private Long rowNum;
 
     public Post toPost() {
         Post post = Post.builder()
