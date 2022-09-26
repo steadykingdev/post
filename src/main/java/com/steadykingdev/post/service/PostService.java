@@ -61,8 +61,11 @@ public class PostService {
         List<Post> postList = memoryPostRepository.findAll();
         List<PostDto> postFormList = new ArrayList<>();
 
+        Long sequance = 0L;
+
         for (Post post : postList) {
             PostDto postDto = post.toPostDto();
+            postDto.setId(++sequance);
             postDto.setNickName(memoryMemberRepository.findById(post.getMemberId()).getNickName());
             postFormList.add(postDto);
         }
