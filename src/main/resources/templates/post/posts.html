@@ -23,6 +23,10 @@
             margin-bottom: 10px;
             float: right;
         }
+        .back_write_btn {
+            margin-top: 10px;
+            float: right;
+        }
 
     </style>
 </head>
@@ -51,6 +55,9 @@
             </tr>
             </tbody>
         </table>
+        <button class="back_write_btn" th:onclick="|location.href='@{/}'|">
+            뒤로가기
+        </button>
     </div>
 </div>
 </body>

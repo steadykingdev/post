@@ -26,15 +26,12 @@
     </div>
     <div class="btn-container">
         <div class="btn">
+            <button th:onclick="|location.href='@{/post}'|">
+                게시판
+            </button>
             <button th:if="!${member}" th:onclick="|location.href='@{/members/add}'|">
                 회원 가입
             </button>
-            <button th:if="${member}"
-                    th:onclick="|location.href='@{/post}'|">
-                게시판
-            </button>
-        </div>
-        <div class="btn">
             <button th:if="!${member}" th:onclick="|location.href='@{/login}'|">
                 로그인
             </button>
