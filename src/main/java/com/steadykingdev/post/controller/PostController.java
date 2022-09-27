@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +36,11 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    public String addPost(@ModelAttribute PostWriteDto postWriteDto, @Login Member member) {
+    public String addPost(@Validated @ModelAttribute PostWriteDto postWriteDto, BindingResult bindingResult, @Login Member member) {
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "post/addPostForm";
+        }
 
         postService.addPost(postWriteDto, member.getId());
         return "redirect:/post";

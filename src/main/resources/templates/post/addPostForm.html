@@ -20,27 +20,23 @@
         <div>
             <h1>게시물 작성</h1>
         </div>
-        <form action="" th:object="${postWriteDto}" method="post">
-            <div th:if="${#fields.hasGlobalErrors()}">
-                <p class="field-error" th:each="err : ${#fields.globalErrors()}"
-                   th:text="${err}"> 전체 오류 메시지</p>
-            </div>
+        <form action="post.html" th:action th:object="${postWriteDto}" method="post">
             <div>
                 <label for="loginId">제목</label>
-                <input type="text" id="loginId"th:field="*{title}"
+                <input type="text" id="loginId" th:field="*{title}"
                        th:errorclass="field-error">
-                <div class="field-error" th:errors="*{title}"/>
+                <div class="field-error" th:errors="*{title}">제목 오류</div>
             </div>
             <div>
                 <label for="contents">본문</label>
-                <textarea id="contents"th:field="*{contents}"
+                <textarea id="contents" th:field="*{contents}"
                           th:errorclass="field-error"
                           wrap="hard"></textarea>
-                <div class="field-error" th:errors="*{contents}"/>
+                <div class="field-error" th:errors="*{contents}">본문 오류</div>
             </div>
             <div>
                 <button type="submit">작성</button>
-                <button th:onclick="|location.href='@{/}'|" type="button">취소</button>
+                <button th:onclick="|location.href='@{/post}'|" type="button">취소</button>
             </div>
         </form>
     </div>
