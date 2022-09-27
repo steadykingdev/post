@@ -37,6 +37,7 @@ public class PostController {
 
     @PostMapping("/add")
     public String addPost(@Validated @ModelAttribute PostWriteDto postWriteDto, BindingResult bindingResult, @Login Member member) {
+
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             return "post/addPostForm";
@@ -46,7 +47,7 @@ public class PostController {
         return "redirect:/post";
     }
 
-    @GetMapping("/{postId}")
+    @GetMapping("/get/{postId}")
     public String getPost(@PathVariable Long postId,
                           @Login Member member, Model model) {
 

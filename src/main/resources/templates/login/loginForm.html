@@ -11,6 +11,12 @@
             border-color: #dc3545;
             color: #dc3545;
         }
+        .btn-container {
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -38,10 +44,12 @@
                 <div class="field-error" th:errors="*{password}"/>
             </div>
             <div>
+            <div class="btn">
                 <button type="submit">로그인</button>
             </div>
-            <div>
+            <div class="btn">
                 <button th:onclick="|location.href='@{/}'|" type="button">취소</button>
+            </div>
             </div>
         </form>
     </div>

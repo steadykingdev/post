@@ -11,6 +11,10 @@
             border-color: #dc3545;
             color: #dc3545;
         }
+        .text-field {
+            width: 100%;
+            height: 200px;
+        }
 
     </style>
 </head>
@@ -23,15 +27,16 @@
         <form action="post.html" th:action th:object="${postWriteDto}" method="post">
             <div>
                 <label for="loginId">제목</label>
-                <input type="text" id="loginId" th:field="*{title}"
-                       th:errorclass="field-error">
+                <input style="width: 100%" type="text" id="loginId" th:field="*{title}"
+                       th:errorclass="field-error" placeholder="제목을 작성해주세요">
                 <div class="field-error" th:errors="*{title}">제목 오류</div>
             </div>
             <div>
                 <label for="contents">본문</label>
-                <textarea id="contents" th:field="*{contents}"
+                <textarea class="text-field" id="contents" th:field="*{contents}"
                           th:errorclass="field-error"
-                          wrap="hard"></textarea>
+                          wrap="hard"
+                          placeholder="본문을 작성해주세요"></textarea>
                 <div class="field-error" th:errors="*{contents}">본문 오류</div>
             </div>
             <div>

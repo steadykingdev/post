@@ -44,8 +44,8 @@
             </thead>
             <tbody>
             <tr th:each="post : ${posts}">
-                <td><a href="post.html" th:href="@{|/post/${post.id}|}" th:text="${post.rowNum}">회원id</a></td>
-                <td><a href="post.html" th:href="@{|/post/${post.id}|}" th:text="${post.title}">제목</a></td>
+                <td><a href="post.html" th:href="@{|/post/get/${post.id}|}" th:text="${post.rowNum}">회원id</a></td>
+                <td><a href="post.html" th:href="@{|/post/get/${post.id}|}" th:text="${post.title}">제목</a></td>
                 <td th:text="${post.nickName}">닉네임</td>
                 <td th:text="${post.dateTime}">작성일</td>
             </tr>

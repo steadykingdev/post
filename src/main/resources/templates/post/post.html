@@ -21,6 +21,13 @@
         .datetime{
             float: right;
         }
+        .btn {
+            display: inline-block;
+        }
+        .btn-container {
+            margin-top: 10px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -36,11 +43,13 @@
         <div class="content_area">
             <pre class="content" th:text="${postForm.contents}">본문</pre>
         </div>
-        <button th:if="${postForm.memberId} == ${memberId}" th:onclick="|location.href='@{/post/{postId}/edit(postId=${postForm.id})}'|">수정</button>
-        <form th:if="${postForm.memberId} == ${memberId}" th:action="@{/post/{postId}/delete(postId=${postForm.id})}" th:method="post">
-            <button type="submit">삭제</button>
-        </form>
-        <button th:onclick="|location.href='@{/post}'|">뒤로가기</button>
+        <div class="btn-container">
+            <button class="btn" th:if="${postForm.memberId} == ${memberId}" th:onclick="|location.href='@{/post/{postId}/edit(postId=${postForm.id})}'|">수정</button>
+            <form class="btn" th:if="${postForm.memberId} == ${memberId}" th:action="@{/post/{postId}/delete(postId=${postForm.id})}" th:method="post">
+                <button type="submit">삭제</button>
+            </form>
+            <button class="btn" th:onclick="|location.href='@{/post}'|">뒤로가기</button>
+        </div>
     </div>
 </div>
 </body>

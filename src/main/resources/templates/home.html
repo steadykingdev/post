@@ -2,14 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8"/>
+    <style>
+        .container {
+            max-width: 560px;
+            margin: auto;
+        }
+        .title {
+            text-align: center;
+        }
+        .btn-container {
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+        }
+    </style>
 </head>
 
 <body>
+<div class="container">
     <div>
-        <h2>홈 화면</h2>
+        <h1 class="title">홈 화면</h1>
     </div>
-    <div>
-        <div>
+    <div class="btn-container">
+        <div class="btn">
             <button th:if="!${member}" th:onclick="|location.href='@{/members/add}'|">
                 회원 가입
             </button>
@@ -18,7 +34,7 @@
                 게시판
             </button>
         </div>
-        <div>
+        <div class="btn">
             <button th:if="!${member}" th:onclick="|location.href='@{/login}'|">
                 로그인
             </button>
@@ -27,6 +43,7 @@
             </button>
         </div>
     </div>
+</div>
 
 </body>
 </html>
